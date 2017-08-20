@@ -1,10 +1,10 @@
 export const firebase = {
-	 apiKey: "AIzaSyA98BR8JSxQswBTD8xVg8xBsgIYl2QGd14",
-	 authDomain: "cryptotask-ff33a.firebaseapp.com",
-	 databaseURL: "https://cryptotask-ff33a.firebaseio.com",
-	 projectId: "cryptotask-ff33a",
-	 storageBucket: "cryptotask-ff33a.appspot.com",
-	 messagingSenderId: "611251813219"
+ apiKey: "AIzaSyBlh9AmTUuhQjGkQgDJ20VazK26Y17anEE",
+ authDomain: "free-stand-1c22f.firebaseapp.com",
+ databaseURL: "https://free-stand-1c22f.firebaseio.com",
+ projectId: "free-stand-1c22f",
+ storageBucket: "free-stand-1c22f.appspot.com",
+ messagingSenderId: "120360845842"
 }
 
 export default { firebase }

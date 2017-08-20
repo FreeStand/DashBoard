@@ -12,7 +12,7 @@ import './App.css'
 
 class App extends Component {
   static propTypes = {
-    questions: PropTypes.array,
+    questions: PropTypes.object,
     firebase: PropTypes.shape({
       push: PropTypes.func.isRequired
     })
@@ -24,16 +24,19 @@ class App extends Component {
                         ? 'Loading'
                         : (isEmpty(questions))
                           ? 'Questions list is empty'
-                          : Object.keys(questions).map((key) => (
-                            <QuestionCard key={key} question={questions[key]} />
-			    ))
+                          : Object.keys(questions).map(function(key,keyI) {
+                           return <QuestionCard key={key} id={key} question={questions[key]} />
+			  })
+     const len =(!isEmpty(questions))?Object.keys(questions).length:0;
+     const claimed_len = (!isEmpty(questions))?Object.keys(questions).map((key) => {return questions[key].uID == undefined}).reduce((a,b)=>{return b? a:++a;},0):0
     return (
       <div className='App'>
         <div className='App-header'>
-          <h2>BountyFeed</h2>
+          <h2>FreeStand</h2>
         </div>
+        <h3>Total Samples: {len}</h3>
+        <h3>Claimed Samples: {claimed_len}</h3>
         <div className='App-question-cards'>
-          <input type="text" style={{width:'70%',marginTop:'3%'}}/>
           {questionsList}
         </div>
       </div>
@@ -41,7 +44,7 @@ class App extends Component {
   }
 }
 const fbWrappedComponent = firebaseConnect([
-  '/feed/cryptocurrency'
+  '/samples'
   // { type: 'once', path: '/todos' } // for loading once instead of binding
   // '/todos#populate=owner:displayNames' // for populating owner parameter from id into string loaded from /displayNames root
   // '/todos#populate=collaborators:users' // for populating owner parameter from id to user object loaded from /users root
@@ -51,6 +54,6 @@ const fbWrappedComponent = firebaseConnect([
 
 export default connect(
   ({ firebase }) => ({
-    questions: dataToJS(firebase, '/feed/cryptocurrency'),
+    questions: dataToJS(firebase, '/samples'),
   })
 )(fbWrappedComponent)
